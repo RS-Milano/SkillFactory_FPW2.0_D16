@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Post
+{% endblock title %}
+
+{% block content %}
+    <div style="display: flex">
+        <div style="flex-basis: 90%">
+            <div>
+                <h2>{{ post.title }}</h2>
+                <hr>
+                <h3 style="padding-bottom: 1%;"><i>{{ post.author }} | category: {{ post.category }} | {{ post.data|date:"d-m-Y P" }}</i></h3>
+                <p style="text-align: justify">{{ post.text|safe }}</p>
+            </div>
+            <h2>Are you shure want to delet this post?</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary">Delet</button>
+            </form>
+        </div>
+        <div style="flex-basis: 10%">
+            <a href="../{{ post.id }}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+{% endblock content %}

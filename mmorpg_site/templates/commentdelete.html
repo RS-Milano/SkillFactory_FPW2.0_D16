@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comment Delete
+{% endblock title %}
+
+{% block content %}
+    <div style="display: flex">
+        <div style="flex-basis: 90%">
+            <div>
+                <h2>Comment:</h2>
+                <h4>{{ comment.author }} | {{ comment.data }}</h4>
+                <h6>{{ comment.text }}</h6>
+            </div>
+            <h2>Are you shure want to delet this comment?</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary">Delet</button>
+            </form>
+        </div>
+        <div style="flex-basis: 10%">
+            <a href="/posts/my_posts_comments" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+{% endblock content %}

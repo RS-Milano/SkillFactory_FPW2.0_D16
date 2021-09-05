@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    All Posts
+{% endblock title %}
+
+{% block content %}
+<div style="display: flex">
+    <div style="flex-basis: 90%">
+        <h2>Comments for my posts</h2>
+        <hr>
+        {% if comments_for_my_posts %}
+            <table style="margin-left: auto; margin-right: auto;"></table>
+                {% for comments in comments_for_my_posts %}
+                    {% for comment in comments %}
+                        <tr>
+                            <td>
+                                <h6 style="text-align: justify">
+                                    <a href="my_posts_comments/{{ comment.id }}" style="text-decoration: none; color: #339999;">{{ comment.text }}</a>
+                                    <i>| {{ comment.author }} | {{ comment.data }}</i>
+                                </h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        {% else %}
+            <h3>No comments. Come back later!</h3>
+        {% endif %}
+        {% if is_paginated %}
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" style="text-decoration: none; color: #339999;">&lt; back</a>
+            {% else %}
+                <span>&lt; back</span>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" style="text-decoration: none; color: #339999;">forward &gt;</a>
+            {% else %}
+                <span>forward &gt;</span>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <div style="flex-basis: 10%">
+        <a href="my_posts_comments/search" class="btn btn-secondary" style="margin-bottom: 3%">Search</a>
+    </div>
+</div>
+{% endblock content %}
+

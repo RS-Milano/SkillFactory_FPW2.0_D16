@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add post
+{% endblock title %}
+
+{% block content %}
+    <div style="display: flex">
+        <div style="flex-basis: 90%">
+            <h2>Post creation</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">Create post</button>
+            </form>
+
+            <!-- <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" name="title" id="title" maxlength="255" required>
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Text:</label>
+                    <input type="text" class="form-control" name="text" id="text" required>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <select id="category" name="category" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="tank">tank</option>
+                        <option value="healer">healer</option>
+                        <option value="damage dealer">damage dealer</option>
+                        <option value="vendor">vendor</option>
+                        <option value="guildmaster">guildmaster</option>
+                        <option value="questgiver">questgiver</option>
+                        <option value="blacksmith">blacksmith</option>
+                        <option value="leatherworker">leatherworker</option>
+                        <option value="potion maker">potion maker</option>
+                        <option value="spellmaster">spellmaster</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary">Create post</button>
+            </form> -->
+
+        </div>
+        <div style="flex-basis: 10%">
+            <a href="/.." class="btn btn-secondary" style="margin-bottom: 3%">All Posts</a>
+        </div>
+    </div>
+{% endblock content %}

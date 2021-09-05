@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Post
+{% endblock title %}
+
+{% block content %}
+<div style="display: flex">
+    <div style="flex-basis: 90%">
+        <div>
+            <h2>{{ post.title }}</h2>
+            <hr>
+            <h3 style="padding-bottom: 1%;"><i>{{ post.author }} | category: {{ post.category }} | {{ post.data|date:"d-m-Y P" }}</i></h3>
+            <p style="text-align: justify">{{ post.text|safe }}</p>
+        </div>
+    </div>
+    <div style="flex-basis: 10%">
+        {% if post.author == request.user %}
+            <a href="{{ request.get_full_path }}/edit" class="btn btn-secondary" style="margin-bottom: 3%">Edit post</a>
+            <a href="{{ request.get_full_path }}/delete" class="btn btn-secondary" style="margin-bottom: 3%">Delete post</a>
+        {% else %}
+            <a href="/.." class="btn btn-secondary" style="margin-bottom: 3%">All Posts</a>
+            <a href="{{ request.get_full_path }}/comment" class="btn btn-secondary">Comment</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comment
+{% endblock title %}
+
+{% block content %}
+<div style="display: flex">
+    <div style="flex-basis: 90%">
+        <div>
+            <h2>{{ post.title }}</h2>
+            <hr>
+            <h3 style="padding-bottom: 1%;"><i>{{ post.author }} | category: {{ post.category }} | {{ post.data|date:"d-m-Y P" }}</i></h3>
+            <p style="text-align: justify">{{ post.text|safe }}</p>
+        </div>
+        <hr>
+        <h2>Comment on</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="text" class="form-label">Text:</label>
+                <input type="text" class="form-control" name="text" id="text" required>
+            </div>
+            <button type="submit" class="btn btn-secondary">Create post</button>
+        </form>
+    </div>
+    <div style="flex-basis: 10%">
+        <a href="../{{ post.id }}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock content %}

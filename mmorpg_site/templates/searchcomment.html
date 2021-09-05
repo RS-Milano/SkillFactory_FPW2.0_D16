@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search Comment
+{% endblock title %}
+
+{% block content %}
+    <div style="display: flex">
+        <div style="flex-basis: 90%">
+            <h2>Search Comment</h2>
+            <form method="GET">
+                <div class="mb-3">
+                    <label for="text" class="form-label">Text contains:</label>
+                    <input type="text" class="form-control" id="text" name="text__icontains">
+                </div>
+                <div class="mb-3">
+                <label for="data" class="form-label">Create data is greater than:</label>
+                <input type="date" class="form-control" id="data" name="data__gt">
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author:</label>
+                    <select name="author" id="author">
+                        <option selected disabled value="">Choose...</option>
+                        {% for author in authors %}
+                            <option value="{{ author.id }}">{{ author.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary">search</button>
+            </form>
+            <hr>
+            {% if comments %}
+                <table style="margin-left: auto; margin-right: auto;">
+                {% for queryset in object_list %}
+                    {% for comment in queryset %}
+                    <tr>
+                        <td style="vertical-align: top; padding-right: 5vh;">
+                            <h6>{{ comment.id }}</h6>
+                        </td>
+                        <td>
+                            <h6 style="text-align: justify">
+                                <a href="{{ post.id }}" style="text-decoration: none; color: #339999;">{{ comment.text }}</a>
+                                <i>({{ comment.data }})</i></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endfor %}
+                </table>      
+            {% else %}
+                <h3>No comments. Come back later!</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

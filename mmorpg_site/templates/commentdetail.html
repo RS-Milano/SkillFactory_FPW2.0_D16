@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comment
+{% endblock title %}
+
+{% block content %}
+<div style="display: flex">
+    <div style="flex-basis: 90%; margin-right: 1%;">
+        <h2>Post:</h2>
+        <h4>{{ comment.post.title }} | {{ comment.post.author }} | {{ comment.post.data }}</h4>
+        <h6>{{ comment.post.text|safe }}</h6>
+        <hr>
+        <h2>Comment:</h2>
+        <h4>{{ comment.author }} | {{ comment.data }}</h4>
+        <h6>{{ comment.text }}</h6>
+    </div>
+    <div style="flex-basis: 10%">
+        {% if not comment.accepted %}
+            <a href="{{ request.get_full_path }}/accept" class="btn btn-secondary" style="margin-bottom: 3%">Accept Comment</a>
+        {% endif %}
+        <a href="{{ request.get_full_path }}/delete" class="btn btn-secondary" style="margin-bottom: 3%">Delete Comment</a>
+        <a href="/posts/my_posts_comments" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock content %}
